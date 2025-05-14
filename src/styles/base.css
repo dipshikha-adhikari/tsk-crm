@@ -1,0 +1,60 @@
+/* BODY DEFAULT STYLES */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark/light mode */
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.lamp-glow {
+  width: 250px;
+  height: auto;
+  filter: drop-shadow(0 0 30px #facc15);
+  opacity: 0.8;
+  position: relative;
+}
+
+.lamp-glow::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.dark .lamp-glow::after {
+  background: rgba(255, 255, 255, 0.2);
+}
+.scrollbar-custom::-webkit-scrollbar {
+  height: 5px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #3c485b; /* light mode track */
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #2c60c8; /* light mode thumb */
+  border-radius: 6px;
+}
+
+.bar-chart .recharts-wrapper {
+  left: -40px;
+}
