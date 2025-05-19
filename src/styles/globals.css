@@ -21,23 +21,13 @@
   --color-card: #ffffff;
 
   /* SPACING */
-  --p-xs: 1rem;
-  --p-sm: 2rem;
-  --p-md: 3rem;
-  --p-lg: 4rem;
-  --p-xl: 5rem;
+  --spacing-xs: 1rem;
+  --spacing-sm: 2rem;
+  --spacing-md: 3rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 5rem;
 
-  /* MARGIN */
-  --m-xs: 0.25rem;
-  --m-sm: 0.5rem;
-  --m-md: 2rem;
-  --m-lg: 3.5rem;
-  --m-xl: 4rem;
-
-  /* GAP */
-  --gap-sm: 1rem;
-  --gap-md: 2rem;
-  --gap-xl: 4rem;
+  --spacing-xl: 4rem;
 
   /* BORDER RADIUS */
   --radius-sm: 4px;
@@ -139,126 +129,126 @@
 
 /* PADDING CLASSES */
 .px-xs {
-  padding-left: var(--p-xs);
-  padding-right: var(--p-xs);
+  padding-left: var(--spacing-xs);
+  padding-right: var(--spacing-xs);
 }
 
 .px-sm {
-  padding-left: var(--p-sm);
-  padding-right: var(--p-sm);
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
 }
 
 .px-md {
-  padding-left: var(--p-md);
-  padding-right: var(--p-md);
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
 }
 
 .px-xl {
-  padding-left: var(--p-xl);
-  padding-right: var(--p-xl);
+  padding-left: var(--spacing-xl);
+  padding-right: var(--spacing-xl);
 }
 .px-lg {
-  padding-left: var(--p-lg);
-  padding-right: var(--p-lg);
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
 }
 
 .py-xs {
-  padding-top: var(--p-xs);
-  padding-bottom: var(--p-xs);
+  padding-top: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
 }
 
 .py-sm {
-  padding-top: var(--p-sm);
-  padding-bottom: var(--p-sm);
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
 }
 
 .py-md {
-  padding-top: var(--p-md);
-  padding-bottom: var(--p-md);
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
 }
 .py-xl {
-  padding-top: var(--p-xl);
-  padding-bottom: var(--p-xl);
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
 }
 
 .p-xs {
-  padding: var(--p-xs);
+  padding: var(--spacing-xs);
 }
 
 .p-sm {
-  padding: var(--p-sm);
+  padding: var(--spacing-sm);
 }
 
 .p-md {
-  padding: var(--p-md);
+  padding: var(--spacing-md);
 }
 
 .p-lg {
-  padding: var(--p-lg);
+  padding: var(--spacing-lg);
 }
 
 .p-xl {
-  padding: var(--p-xl);
+  padding: var(--spacing-xl);
 }
 
 /* MARGIN CLASSES */
 .m-xs {
-  margin: var(--m-xs);
+  margin: var(--spacing-xs);
 }
 
 .m-sm {
-  margin: var(--m-sm);
+  margin: var(--spacing-sm);
 }
 
 .m-md {
-  margin: var(--m-md);
+  margin: var(--spacing-md);
 }
 
 .m-lg {
-  margin: var(--m-lg);
+  margin: var(--spacing-lg);
 }
 
 .m-xl {
-  margin: var(--m-xl);
+  margin: var(--spacing-xl);
 }
 
 .mx-sm {
-  margin-left: var(--m-sm);
-  margin-right: var(--m-sm);
+  margin-left: var(--spacing-sm);
+  margin-right: var(--spacing-sm);
 }
 
 .mx-md {
-  margin-left: var(--m-md);
-  margin-right: var(--m-md);
+  margin-left: var(--spacing-md);
+  margin-right: var(--spacing-md);
 }
 
 .my-sm {
-  margin-top: var(--m-sm);
-  margin-bottom: var(--m-sm);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .my-md {
-  margin-top: var(--m-md);
-  margin-bottom: var(--m-md);
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .mb-sm {
-  margin-bottom: var(--m-sm);
+  margin-bottom: var(--spacing-sm);
 }
 .mb-md {
-  margin-bottom: var(--m-md);
+  margin-bottom: var(--spacing-md);
 }
 .mb-xl {
-  margin-bottom: var(--m-xl);
+  margin-bottom: var(--spacing-xl);
 }
 .mt-sm {
-  margin-top: var(--m-sm);
+  margin-top: var(--spacing-sm);
 }
 .mt-md {
-  margin-top: var(--m-md);
+  margin-top: var(--spacing-md);
 }
 .mt-xl {
-  margin-top: var(--m-xl);
+  margin-top: var(--spacing-xl);
 }
 
 /* SHADOWS */
@@ -288,13 +278,27 @@
 }
 
 .gap-sm {
-  gap: var(--gap-sm);
+  gap: var(--spacing-sm);
 }
 
 .gap-md {
-  gap: var(--gap-md);
+  gap: var(--spacing-md);
 }
 
 .gap-xl {
-  gap: var(--gap-xl);
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .sm\:px-sm {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:px-md {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
 }

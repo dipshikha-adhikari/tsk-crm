@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <nav className=" shadow  sticky top-0">
-      <div className="max-w-[1500px] px-xs  md:px-md mx-auto flex justify-between items-center">
+      <div className="max-w-[1500px] px-xs  md:px-sm mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to={ROUTES.DASHBOARD} className="text-xl font-bold text-accent">
           MyCRM
