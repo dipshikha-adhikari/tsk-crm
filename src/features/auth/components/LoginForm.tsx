@@ -1,43 +1,53 @@
-import { useState } from "react";
+// features/auth/components/LoginForm.tsx
+import { useForm } from "react-hook-form";
 
 type Props = {
   onSubmit: (email: string, password: string) => void;
 };
 
 const LoginForm = ({ onSubmit }: Props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ email: string; password: string }>();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(email, password);
+  const handleLogin = async (data: { email: string; password: string }) => {
+    await onSubmit(data.email, data.password);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit(handleLogin)}
+      className="w-full max-w-md mx-auto text-foreground bg-background space-y-4"
+    >
       <div>
-        <label className="block text-sm font-medium  mb-1">Email</label>
+        <label className="block mb-1 ">Email</label>
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
+          {...register("email", { required: "Email is required" })}
+          className="w-full px-3 py-2 border rounded-md "
         />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+        )}
       </div>
+
       <div>
-        <label className="block text-sm font-medium  mb-1">Password</label>
+        <label className="block mb-1 ">Password</label>
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
+          {...register("password", { required: "Password is required" })}
+          className="w-full px-3 py-2 border rounded-md "
         />
+        {errors.password && (
+          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+        )}
       </div>
+
       <button
         type="submit"
-        className="w-full cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition"
+        className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
       >
         Login
       </button>

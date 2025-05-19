@@ -1,5 +1,8 @@
+import { useAuth } from "@/context/AuthContext";
 import { X } from "lucide-react";
-import React from "react";
+import Icon from "../ui/Icon";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/routes/routes";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -7,6 +10,9 @@ type SidebarProps = {
 };
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Blurry Overlay background */}
@@ -22,29 +28,39 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-6">
           MyCRM
-          <button className="p-2 rounded-full mb-6">
+          <button className=" rounded-full cursor-pointer ">
             <X size={24} onClick={onClose} />
           </button>
         </div>
 
-        <div className="space-y-4">
-          <a
-            href="#"
-            className="block text-gray-800 dark:text-white"
-            onClick={onClose}
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="block text-gray-800 dark:text-white"
-            onClick={onClose}
-          >
-            Dashboard
-          </a>
+        <div className="space-y-4 w-fit">
+          <Icon
+            id="dashboard"
+            title="Dashboard"
+            onClick={() => {
+              navigate(ROUTES.DASHBOARD);
+              onClose();
+            }}
+            size={24}
+            className="text-blue-600"
+          />
           {/* Add more links as needed */}
+          <div>
+            {user && (
+              <Icon
+                id="logout"
+                title="Logout"
+                size={20}
+                onClick={() => {
+                  logout();
+                  onClose();
+                }}
+                className="text-warning"
+              />
+            )}
+          </div>
         </div>
       </div>
     </>
