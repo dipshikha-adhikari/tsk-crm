@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <nav className=" shadow  sticky top-0">
-      <div className="max-w-[1500px] px-xs  md:px-sm mx-auto flex justify-between items-center">
+      <div className="max-w-[1500px] px-xs py-2 md:px-sm mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to={ROUTES.DASHBOARD} className="text-xl font-bold text-accent">
           MyCRM
@@ -30,7 +30,7 @@ const Navbar = () => {
               id="logout"
               title="Logout"
               size={20}
-              className="text-yellow-600"
+              className="text-warning"
             />
           )}
         </div>

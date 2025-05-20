@@ -19,7 +19,7 @@ const Icon: React.FC<IconProps> = ({
 }) => {
   return (
     <div
-      className="flex gap-2 items-center cursor-pointer font-medium"
+      className="flex  items-center cursor-pointer font-medium"
       onClick={onClick}
     >
       {title && <button className="cursor-pointer">{title}</button>}
