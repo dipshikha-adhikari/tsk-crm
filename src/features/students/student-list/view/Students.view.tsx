@@ -1,0 +1,41 @@
+// src/features/students/view/StudentsPage.tsx
+import PageHeader from "@/components/ui/PageHeader";
+import { Table } from "@/components/ui/table/Table";
+import { useStudentListController } from "../controllers/useStudentListController";
+import { breadCrumbConfig, data, headers } from "./config";
+
+const StudentsPage = () => {
+  const { handleSearch, sortConfig, setSortConfig } =
+    useStudentListController();
+
+  return (
+    <div className="px-sm md:px-md">
+      {/* Page Header */}
+      <PageHeader
+        config={{
+          title: "Students",
+          search: {
+            placeholder: "Search students...",
+            onChange: handleSearch,
+          },
+          filter: true,
+          createLabel: "New Student",
+        }}
+        onFilter={() => console.log("Open filter modal")}
+        onAdd={() => console.log("Open create student modal")}
+        breadCrumb={breadCrumbConfig}
+      />
+      <section className="">
+        {/* Table */}
+        <Table
+          headers={headers}
+          rows={data}
+          sortConfig={sortConfig}
+          onSort={(key, order) => setSortConfig({ key, order })}
+        />
+      </section>
+    </div>
+  );
+};
+
+export default StudentsPage;

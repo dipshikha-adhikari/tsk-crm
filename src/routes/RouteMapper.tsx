@@ -4,6 +4,7 @@ import AuthView from "@/features/auth/view";
 import Dashboard from "@/features/dashboard/view/Dashboard.view";
 import PrivateRoute from "./PrivateRoute";
 import PrivateLayout from "@/components/layouts/PrivateLayout";
+import StudentsPage from "@/features/students/student-list/view/Students.view";
 
 const RouteMapper = () => {
   return (
@@ -21,6 +22,7 @@ const RouteMapper = () => {
       >
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.LANDING} element={<Dashboard />} />
+        <Route path={ROUTES.STUDENTS} element={<StudentsPage />} />
       </Route>
     </Routes>
   );
