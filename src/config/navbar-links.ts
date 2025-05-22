@@ -8,14 +8,38 @@ interface NavLink {
 }
 
 export const navbarLinks: NavLink[] = [
+
     {
+        label: "Dashboard",
+        href: "/dashboard",
+        icon: "dashboard",
+    }, {
         label: "Students",
         href: "/students",
         icon: "users",
     },
     {
-        label: "Dashboard",
-        href: "/dashboard",
-        icon: "dashboard",
+        label: "Teachers",
+        href: "/teachers",
+        icon: "users",
     },
 ];
+
+
+export const adminLinks = [
+    {
+        label: "Profile",
+        href: "/profile",
+    }, {
+        label: "Settings",
+        href: "/settings",
+    },
+    {
+        label: "Help",
+        href: "/help",
+    },
+    {
+        label: "Sign Out",
+        href: "/signout",
+    },
+]

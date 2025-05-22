@@ -11,7 +11,7 @@
   --color-background: #ffffff;
   --color-foreground: #171717;
   --color-success: rgb(97, 140, 123);
-  --color-warning: rgb(168, 48, 5);
+  --color-warning: rgb(255, 191, 14);
   --color-error: rgb(195, 25, 82);
   --color-accent: #0070f3; /* Blue accent */
   --color-muted: rgb(241, 242, 245);
@@ -277,6 +277,9 @@
   border-radius: var(--radius-lg);
 }
 
+.gap-xs {
+  gap: var(--spacing-xs);
+}
 .gap-sm {
   gap: var(--spacing-sm);
 }

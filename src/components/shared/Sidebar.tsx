@@ -1,8 +1,8 @@
+import { navbarLinks } from "@/config/navbar-links";
 import { useAuth } from "@/context/AuthContext";
 import { X } from "lucide-react";
-import Icon from "../ui/Icon";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@/routes/routes";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "./Logo";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -29,38 +29,20 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         }`}
       >
         <div className="flex justify-between mb-6">
-          MyCRM
+          <Logo />
           <button className=" rounded-full cursor-pointer ">
             <X size={24} onClick={onClose} />
           </button>
         </div>
-
-        <div className="space-y-4 w-fit">
-          <Icon
-            id="dashboard"
-            title="Dashboard"
-            onClick={() => {
-              navigate(ROUTES.DASHBOARD);
-              onClose();
-            }}
-            size={24}
-            className="text-blue-600"
-          />
-          {/* Add more links as needed */}
-          <div>
-            {user && (
-              <Icon
-                id="logout"
-                title="Logout"
-                size={20}
-                onClick={() => {
-                  logout();
-                  onClose();
-                }}
-                className="text-warning"
-              />
-            )}
-          </div>
+        <div className="grid gap-xs">
+          {navbarLinks.map((link) => (
+            <Link
+              to={link.href}
+              className="flex items-center gap-4 text-sm font-medium hover:text-primary text-muted-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </>
