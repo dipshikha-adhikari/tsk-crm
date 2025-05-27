@@ -41,8 +41,8 @@ export const Table: React.FC<TableProps> = ({
       {/* Added z-0 to ensure proper stacking */}
       <div className="">
         <div className="[&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-muted/50 [&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:rounded-full">
-          <table className={`w-full text-sm min-w-[500px]  `}>
-            <thead className="bg-muted/40 border-default sticky top-0 ">
+          <table className={`w-full border-collapse text-sm min-w-[500px]  `}>
+            <thead className="bg-muted/40 sticky top-0 ">
               {" "}
               {/* Added z-10 for header */}
               <tr>
@@ -75,7 +75,7 @@ export const Table: React.FC<TableProps> = ({
                 </tr>
               ) : (
                 rows.map((row, rowIndex) => (
-                  <tr key={rowIndex} className="border-default">
+                  <tr key={rowIndex} className="">
                     {headers.map(({ key }) => (
                       <td key={key} className="px-4 py-2">
                         {row[key]}
