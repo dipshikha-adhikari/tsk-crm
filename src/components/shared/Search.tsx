@@ -1,17 +1,17 @@
 // Search.tsx
+import { useUI } from "@/context";
 import { useState, useRef, useEffect } from "react";
 
 interface SearchProps {
   className?: string;
-  isSidebarOpen?: boolean; // Add this prop
 }
 
-const Search = ({ className = "", isSidebarOpen = false }: SearchProps) => {
+const Search = ({ className = "" }: SearchProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
-
+  const { isMenuOpen } = useUI();
   // Dummy suggestions data
   const suggestions = [
     "Dashboard",
@@ -39,7 +39,7 @@ const Search = ({ className = "", isSidebarOpen = false }: SearchProps) => {
         setShowSuggestions(false);
 
         // Hide mobile search if no suggestions are showing and sidebar is not open
-        if (!showSuggestions && window.innerWidth < 768 && !isSidebarOpen) {
+        if (!showSuggestions && window.innerWidth < 768 && !isMenuOpen) {
           setShowMobileSearch(false);
         }
       }
@@ -49,15 +49,15 @@ const Search = ({ className = "", isSidebarOpen = false }: SearchProps) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showSuggestions, isSidebarOpen]);
+  }, [showSuggestions, isMenuOpen]);
 
   // Close mobile search when sidebar opens
   useEffect(() => {
-    if (isSidebarOpen) {
+    if (isMenuOpen) {
       setShowMobileSearch(false);
       setShowSuggestions(false);
     }
-  }, [isSidebarOpen]);
+  }, [isMenuOpen]);
 
   return (
     <div className={`${className} relative`} ref={searchRef}>
@@ -136,7 +136,7 @@ const Search = ({ className = "", isSidebarOpen = false }: SearchProps) => {
 
         {/* Suggestions dropdown */}
         {showSuggestions && searchQuery && (
-          <div className="md:absolute w-full mx-auto max-w-[500px] rounded-sm border-default py-1 max-h-60 overflow-auto z-10 bg-background">
+          <div className="md:absolute w-full z-50 mx-auto max-w-[500px] rounded-sm border-default py-1 max-h-60 overflow-auto z-10 bg-background">
             {filteredSuggestions.length > 0 ? (
               filteredSuggestions.map((item, index) => (
                 <div

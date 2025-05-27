@@ -1,6 +1,5 @@
 // Navbar.tsx
 import { useAuth } from "@/context/AuthContext";
-import { useNavbar } from "@/hooks/useNavbar";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "../../ui/ThemeToggle";
 import AdminMenu from "../AdminMenu";
@@ -8,10 +7,16 @@ import Logo from "../Logo";
 import Search from "../Search";
 import Sidebar from "../Sidebar";
 import NavbarMenu from "./NavbarMenu";
+import { useUI } from "@/context";
 
 const Navbar = () => {
-  const { isDropdownOpen, dropdownRef, setIsDropdownOpen, isOpen, toggleMenu } =
-    useNavbar();
+  const {
+    isDropdownOpen,
+    dropdownRef,
+    setIsDropdownOpen,
+    isMenuOpen,
+    toggleMenu,
+  } = useUI();
   const { user } = useAuth();
 
   return (
@@ -24,7 +29,7 @@ const Navbar = () => {
               onClick={toggleMenu}
               className="cursor-pointer focus:outline-none"
             >
-              {isOpen ? (
+              {isMenuOpen ? (
                 <X size={24} className="cursor-pointer" />
               ) : (
                 <Menu size={24} />
@@ -39,7 +44,7 @@ const Navbar = () => {
 
         {/* RIGHT */}
         <div className="relative flex items-center gap-xs justify-end">
-          <Search isSidebarOpen={isOpen} />
+          <Search />
           <ThemeToggle />
 
           <div className="flex gap-2 items-center" ref={dropdownRef}>
@@ -60,7 +65,7 @@ const Navbar = () => {
       </div>
 
       {/* Sidebar (Mobile Menu) */}
-      <Sidebar isOpen={isOpen} onClose={toggleMenu} />
+      <Sidebar />
     </nav>
   );
 };

@@ -1,5 +1,4 @@
 // components/Table.tsx
-import { useNavbar } from "@/hooks/useNavbar";
 import { SortOrder, TableProps } from "@/types/table.types";
 import { cn } from "@/utils/cn";
 import { ChevronDown, ChevronUp, ChevronsUpDown } from "lucide-react";
@@ -10,8 +9,6 @@ export const Table: React.FC<TableProps> = ({
   sortConfig,
   onSort,
 }) => {
-  const { isOpen } = useNavbar();
-
   const handleSort = (key: string) => {
     if (!onSort) return;
 
@@ -38,17 +35,14 @@ export const Table: React.FC<TableProps> = ({
       <ChevronsUpDown className="w-4 h-4 text-muted-foreground" />
     );
   };
-  console.log(isOpen);
   return (
-    <div className="relative z-0">
+    <div className="relative ">
       {" "}
       {/* Added z-0 to ensure proper stacking */}
-      <div className="overflow-x-auto">
+      <div className="">
         <div className="[&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-muted/50 [&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:rounded-full">
-          <table
-            className={`w-full text-sm min-w-[500px] ${isOpen && "hidden"}`}
-          >
-            <thead className="bg-muted/40 border-default sticky top-0 z-0">
+          <table className={`w-full text-sm min-w-[500px]  `}>
+            <thead className="bg-muted/40 border-default sticky top-0 ">
               {" "}
               {/* Added z-10 for header */}
               <tr>

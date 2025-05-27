@@ -42,6 +42,13 @@
   /* FONT */
   --font-sans: "Inter", sans-serif;
   --font-mono: "Fira Code", monospace;
+
+  /* Recommended z-index scale (add to your CSS) */
+  --z-sidebar: 50;
+  --z-modal: 100;
+  --z-search: 30;
+  --z-table: 20;
+  --z-dropdown: 40;
 }
 
 [data-theme="dark"] {

@@ -3,6 +3,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import { Table } from "@/components/ui/table/Table";
 import { useStudentListController } from "../controllers/useStudentListController";
 import { breadCrumbConfig, data, headers } from "./config";
+import { useUI } from "@/context";
 
 const StudentsPage = () => {
   const { handleSearch, sortConfig, setSortConfig } =
