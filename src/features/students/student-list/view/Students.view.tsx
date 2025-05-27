@@ -9,7 +9,7 @@ const StudentsPage = () => {
     useStudentListController();
 
   return (
-    <div className="px-sm md:px-md">
+    <div className="sm:px-sm px-xs ">
       {/* Page Header */}
       <PageHeader
         config={{
@@ -25,7 +25,7 @@ const StudentsPage = () => {
         onAdd={() => console.log("Open create student modal")}
         breadCrumb={breadCrumbConfig}
       />
-      <section className="">
+      <section className="py-xs">
         {/* Table */}
         <Table
           headers={headers}

@@ -37,7 +37,7 @@ const PageHeader = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between py-sm items-start md:items-center gap-sm ">
+    <div className="flex flex-col md:flex-row justify-between py-xs items-start md:items-center gap-xs ">
       {/* Left */}
       <div className="space-y-1">
         {config?.title && (
@@ -47,7 +47,7 @@ const PageHeader = ({
       </div>
 
       {/* Right */}
-      <div className="flex flex-wrap gap-2 items-center mt-2 md:mt-0">
+      <div className="flex flex-wrap gap-xs items-center  ">
         {config?.search && (
           <Input
             placeholder={

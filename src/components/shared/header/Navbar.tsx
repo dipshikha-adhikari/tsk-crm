@@ -1,12 +1,13 @@
-import { navbarLinks } from "@/config/navbar-links";
+// Navbar.tsx
+import { useAuth } from "@/context/AuthContext";
 import { useNavbar } from "@/hooks/useNavbar";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
-import ThemeToggle from "../ui/ThemeToggle";
-import AdminMenu from "./AdminMenu";
-import Logo from "./Logo";
-import Sidebar from "./Sidebar";
-import { useAuth } from "@/context/AuthContext";
+import ThemeToggle from "../../ui/ThemeToggle";
+import AdminMenu from "../AdminMenu";
+import Logo from "../Logo";
+import Search from "../Search";
+import Sidebar from "../Sidebar";
+import NavbarMenu from "./NavbarMenu";
 
 const Navbar = () => {
   const { isDropdownOpen, dropdownRef, setIsDropdownOpen, isOpen, toggleMenu } =
@@ -14,14 +15,14 @@ const Navbar = () => {
   const { user } = useAuth();
 
   return (
-    <nav className=" shadow bg-muted sticky top-0">
-      <div className="max-w-[1600px] px-sm py-2 md:px-md mx-auto flex justify-between items-center">
+    <nav className="shadow bg-muted sticky top-0">
+      <div className="max-w-[1600px]  px-xs sm:px-sm py-2 mx-auto flex justify-between items-center">
         <div className="flex gap-6">
           {/* Mobile Hamburger */}
           <div className="md:hidden flex items-center space-x-3">
             <button
               onClick={toggleMenu}
-              className=" cursor-pointer   focus:outline-none"
+              className="cursor-pointer focus:outline-none"
             >
               {isOpen ? (
                 <X size={24} className="cursor-pointer" />
@@ -33,32 +34,25 @@ const Navbar = () => {
 
           {/* Logo */}
           <Logo />
-          <div className="hidden ml-20 md:flex gap-6">
-            {navbarLinks.map((link) => (
-              <Link
-                to={link.href}
-                className="flex items-center gap-2 text-sm font-medium hover:text-primary text-muted-foreground"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {/* Add more links here */}
-          </div>
+          <NavbarMenu />
         </div>
 
-        {/* RIGHT  */}
-        <div className=" relative  flex items-center gap-xs justify-end">
+        {/* RIGHT */}
+        <div className="relative flex items-center gap-xs justify-end">
+          <Search isSidebarOpen={isOpen} />
           <ThemeToggle />
 
           <div className="flex gap-2 items-center" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className=" rounded-full font-bold text-xl p-2 border-default cursor-pointer "
+              className="rounded-full font-bold text-xl p-2 border-default cursor-pointer"
               aria-label="Settings"
             >
               {user?.email?.charAt(0).toUpperCase()}
             </button>
-            <p className="text-muted-foreground ">{user?.email}</p>
+            <p className="text-muted-foreground hidden sm:block">
+              {user?.email}
+            </p>
           </div>
           {/* Dropdown Modal */}
           {isDropdownOpen && <AdminMenu />}
