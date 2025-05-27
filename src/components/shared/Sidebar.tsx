@@ -1,66 +1,52 @@
-import { useAuth } from "@/context/AuthContext";
+import { navbarLinks } from "@/config/navbar-links";
 import { X } from "lucide-react";
-import Icon from "../ui/Icon";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@/routes/routes";
+import { Link } from "react-router-dom";
+import Logo from "./Logo";
+import { useUI } from "@/context";
 
-type SidebarProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  const { logout, user } = useAuth();
-  const navigate = useNavigate();
+const Sidebar = () => {
+  const location = window.location.pathname;
+  const { isMenuOpen, toggleMenu } = useUI();
+  const isActive = (href: string) => {
+    return location === href;
+  };
 
   return (
     <>
       {/* Blurry Overlay background */}
-      {isOpen && (
+      {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-lg z-10 md:hidden"
-          onClick={onClose}
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          onClick={toggleMenu}
         ></div>
       )}
       {/* Sidebar (Mobile Menu) */}
       <div
-        className={`fixed top-0 left-0 w-3/4 md:w-1/2 bg-background p-xs h-screen shadow-lg z-20 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 w-3/4 md:w-1/2 bg-background h-screen shadow-lg transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } z-50 px-xs sm:px-sm py-xs md:hidden`}
       >
         <div className="flex justify-between mb-6">
-          MyCRM
-          <button className=" rounded-full cursor-pointer ">
-            <X size={24} onClick={onClose} />
+          <Logo />
+          <button className="rounded-full cursor-pointer">
+            <X size={24} onClick={toggleMenu} />
           </button>
         </div>
-
-        <div className="space-y-4 w-fit">
-          <Icon
-            id="dashboard"
-            title="Dashboard"
-            onClick={() => {
-              navigate(ROUTES.DASHBOARD);
-              onClose();
-            }}
-            size={24}
-            className="text-blue-600"
-          />
-          {/* Add more links as needed */}
-          <div>
-            {user && (
-              <Icon
-                id="logout"
-                title="Logout"
-                size={20}
-                onClick={() => {
-                  logout();
-                  onClose();
-                }}
-                className="text-warning"
-              />
-            )}
-          </div>
+        <div className="grid gap-xs">
+          {navbarLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              onClick={toggleMenu}
+              className={`flex items-center gap-4 text-sm font-medium hover:text-primary ${
+                isActive(link.href)
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </>
