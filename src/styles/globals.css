@@ -11,7 +11,7 @@
   --color-background: #ffffff;
   --color-foreground: #171717;
   --color-success: rgb(97, 140, 123);
-  --color-warning: rgb(232, 9, 13);
+  --color-warning: rgb(255, 191, 14);
   --color-error: rgb(195, 25, 82);
   --color-accent: #0070f3; /* Blue accent */
   --color-muted: rgb(241, 242, 245);
@@ -21,11 +21,11 @@
   --color-card: #ffffff;
 
   /* SPACING */
-  --spacing-xs: 1rem;
-  --spacing-sm: 2rem;
-  --spacing-md: 3rem;
-  --spacing-lg: 4rem;
-  --spacing-xl: 5rem;
+  --spacing-xs: 0.75rem;
+  --spacing-sm: 1.5rem;
+  --spacing-md: 2.25rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 3.75rem;
 
   --spacing-xl: 4rem;
 
@@ -42,6 +42,13 @@
   /* FONT */
   --font-sans: "Inter", sans-serif;
   --font-mono: "Fira Code", monospace;
+
+  /* Recommended z-index scale (add to your CSS) */
+  --z-sidebar: 50;
+  --z-modal: 100;
+  --z-search: 30;
+  --z-table: 20;
+  --z-dropdown: 40;
 }
 
 [data-theme="dark"] {
@@ -277,6 +284,9 @@
   border-radius: var(--radius-lg);
 }
 
+.gap-xs {
+  gap: var(--spacing-xs);
+}
 .gap-sm {
   gap: var(--spacing-sm);
 }
@@ -287,6 +297,51 @@
 
 .gap-xl {
   gap: var(--spacing-xl);
+}
+
+/* Add these hover variants to your globals.css file */
+
+/* Hover states for background colors */
+.hover\:bg-muted:hover {
+  background-color: var(--color-muted);
+}
+
+.hover\:bg-accent:hover {
+  background-color: var(--color-accent);
+}
+
+.hover\:bg-card:hover {
+  background-color: var(--color-card);
+}
+
+/* Hover states for text colors */
+.hover\:text-foreground:hover {
+  color: var(--color-foreground);
+}
+
+.hover\:text-accent:hover {
+  color: var(--color-accent);
+}
+
+.hover\:text-muted-foreground:hover {
+  color: var(--color-muted-foreground);
+}
+
+.hover\:text-success:hover {
+  color: var(--color-success);
+}
+
+.hover\:text-warning:hover {
+  color: var(--color-warning);
+}
+
+/* Hover states for borders */
+.hover\:border-default:hover {
+  border-color: var(--color-border);
+}
+
+.hover\:border-accent:hover {
+  border-color: var(--color-accent);
 }
 
 @media (min-width: 640px) {
