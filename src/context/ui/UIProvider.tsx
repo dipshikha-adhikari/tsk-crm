@@ -9,7 +9,6 @@ type UIContextType = {
   isDropdownOpen;
   dropdownRef;
   setIsDropdownOpen;
-  isOpen;
   // Other UI states...
 };
 
@@ -21,7 +20,6 @@ export const UIContext = createContext<UIContextType>({
   isDropdownOpen: () => {},
   dropdownRef: null,
   setIsDropdownOpen: () => {},
-  isOpen: false,
 });
 
 export const UIProvider = ({ children }: { children: React.ReactNode }) => {
