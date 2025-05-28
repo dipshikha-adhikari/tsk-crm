@@ -1,5 +1,5 @@
 // Search.tsx
-import { useUI } from "@/context";
+import { useUI } from "@/context/ui/UIProvider";
 import { useState, useRef, useEffect } from "react";
 
 interface SearchProps {

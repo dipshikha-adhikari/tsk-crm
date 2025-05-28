@@ -1,65 +1,34 @@
-import { createContext, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+// contexts/useUI.tsx
+import { createContext, useContext, useState } from "react";
 
 type UIContextType = {
   isMenuOpen: boolean;
   openMenu: () => void;
   closeMenu: () => void;
   toggleMenu: () => void;
-  isDropdownOpen: boolean;
-  dropdownRef: React.RefObject<HTMLDivElement>;
-  setIsDropdownOpen: (value: boolean) => void;
-  isCurrentPage: (href: string) => boolean;
 };
 
-export const UIContext = createContext<UIContextType>({
-  isMenuOpen: false,
-  openMenu: () => {},
-  closeMenu: () => {},
-  toggleMenu: () => {},
-  isDropdownOpen: false,
-  dropdownRef: null,
-  setIsDropdownOpen: () => {},
-  isCurrentPage: () => false,
-});
+export const UIContext = createContext<UIContextType | undefined>(undefined);
 
-export const UIProvider = ({ children }: { children: React.ReactNode }) => {
+export function UIProvider({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const location = useLocation(); // Use React Router's useLocation
 
-  const isCurrentPage = (href: string) => {
-    return location.pathname === href;
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   const value = {
     isMenuOpen,
-    openMenu: () => setIsMenuOpen(true),
-    closeMenu: () => setIsMenuOpen(false),
-    toggleMenu: () => setIsMenuOpen((prev) => !prev),
-    isDropdownOpen,
-    setIsDropdownOpen,
-    dropdownRef,
-    isCurrentPage,
+    openMenu,
+    closeMenu,
+    toggleMenu,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
+}
+
+export const useUI = () => {
+  const context = useContext(UIContext);
+  if (!context) throw new Error("useUI must be used within UIProvider");
+  return context;
 };
