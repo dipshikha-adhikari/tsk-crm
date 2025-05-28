@@ -3,14 +3,11 @@ import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { useUI } from "@/context";
+import { useActivePath } from "@/hooks/useActivePath";
 
 const Sidebar = () => {
-  const location = window.location.pathname;
   const { isMenuOpen, toggleMenu } = useUI();
-  const isActive = (href: string) => {
-    return location === href;
-  };
-
+  const { isActive } = useActivePath();
   return (
     <>
       {/* Blurry Overlay background */}
