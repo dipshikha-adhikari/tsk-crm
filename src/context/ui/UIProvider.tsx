@@ -1,15 +1,15 @@
 import { createContext, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-// context/providers/UIProvider.tsx
 type UIContextType = {
-  isMenuOpen: boolean; // Changed from isSidebarOpen
-  openMenu: () => void; // Changed from openSidebar
+  isMenuOpen: boolean;
+  openMenu: () => void;
   closeMenu: () => void;
   toggleMenu: () => void;
-  isDropdownOpen;
-  dropdownRef;
-  setIsDropdownOpen;
-  // Other UI states...
+  isDropdownOpen: boolean;
+  dropdownRef: React.RefObject<HTMLDivElement>;
+  setIsDropdownOpen: (value: boolean) => void;
+  isCurrentPage: (href: string) => boolean;
 };
 
 export const UIContext = createContext<UIContextType>({
@@ -17,15 +17,21 @@ export const UIContext = createContext<UIContextType>({
   openMenu: () => {},
   closeMenu: () => {},
   toggleMenu: () => {},
-  isDropdownOpen: () => {},
+  isDropdownOpen: false,
   dropdownRef: null,
   setIsDropdownOpen: () => {},
+  isCurrentPage: () => false,
 });
 
 export const UIProvider = ({ children }: { children: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation(); // Use React Router's useLocation
+
+  const isCurrentPage = (href: string) => {
+    return location.pathname === href;
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -52,6 +58,7 @@ export const UIProvider = ({ children }: { children: React.ReactNode }) => {
     isDropdownOpen,
     setIsDropdownOpen,
     dropdownRef,
+    isCurrentPage,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

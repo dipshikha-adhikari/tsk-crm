@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const useNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen((prev) => !prev);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const location = useLocation(); // Use React Router's useLocation
+
+    const isCurrentPage = (href: string) => {
+        return location.pathname === href;
+    };
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -28,6 +35,7 @@ export const useNavbar = () => {
         isDropdownOpen,
         setIsDropdownOpen,
         dropdownRef,
-        isOpen
+        isOpen,
+        isCurrentPage
     }
 }
