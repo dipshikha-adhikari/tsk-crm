@@ -6,3 +6,4 @@ export const ROUTES = {
     STUDENTS: "/students",
     TEACHERS: "/teachers"
 };
+

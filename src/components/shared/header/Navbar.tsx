@@ -1,18 +1,19 @@
 // Navbar.tsx
+import { useTheme } from "@/context/theme/ThemeProvider";
+import { useUI } from "@/context/ui/UIProvider";
+import { useDropdown } from "@/hooks/useDropdown";
+import { RootState } from "@/store";
 import { Menu, Moon, Sun, X } from "lucide-react";
+import { useSelector } from "react-redux";
 import AdminMenu from "../AdminMenu";
 import Logo from "../Logo";
 import Search from "../Search";
 import Sidebar from "../Sidebar";
 import NavbarMenu from "./NavbarMenu";
-import { useTheme } from "@/context/theme/ThemeProvider";
-import { useDropdown } from "@/hooks/useDropdown";
-import { useUI } from "@/context/ui/UIProvider";
-import { useAuth } from "@/context/auth/AuthProvider";
 
 const Navbar = () => {
   const { isMenuOpen, toggleMenu } = useUI();
-  const { user } = useAuth();
+   const { user } = useSelector((state: RootState) => state.auth);
   const { theme, toggleTheme } = useTheme();
   const { dropdownRef, isOpen, toggle } = useDropdown();
   return (
