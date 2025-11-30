@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 
 type Props = {
   onSubmit: (email: string, password: string) => Promise<void>;
+  loading:boolean
 };
 
-const RegisterForm = ({ onSubmit }: Props) => {
+const RegisterForm = ({ onSubmit ,loading}: Props) => {
   const {
     register,
     handleSubmit,
@@ -14,7 +15,7 @@ const RegisterForm = ({ onSubmit }: Props) => {
   } = useForm<{ email: string; password: string; confirmPassword: string }>();
 
   const password = watch("password");
-  const [isLoading, setIsLoading] = useState(false);
+ 
 
   const handleRegister = async (data) => {
     await onSubmit(data.email, data.password);
@@ -31,7 +32,7 @@ const RegisterForm = ({ onSubmit }: Props) => {
           type="email"
           {...register("email", { required: "Email is required" })}
           className="w-full px-3 py-2 border rounded-md "
-          disabled={isLoading}
+          disabled={loading}
         />
         {errors.email && (
           <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -50,7 +51,7 @@ const RegisterForm = ({ onSubmit }: Props) => {
             },
           })}
           className="w-full px-3 py-2 border rounded-md "
-          disabled={isLoading}
+          disabled={loading}
         />
         {errors.password && (
           <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
@@ -66,7 +67,7 @@ const RegisterForm = ({ onSubmit }: Props) => {
             validate: (value) => value === password || "Passwords do not match",
           })}
           className="w-full px-3 py-2 border rounded-md "
-          disabled={isLoading}
+          disabled={loading}
         />
         {errors.confirmPassword && (
           <p className="text-red-500 text-sm mt-1">
@@ -77,12 +78,12 @@ const RegisterForm = ({ onSubmit }: Props) => {
 
       <button
         type="submit"
-        disabled={isLoading}
+        disabled={loading}
         className={`w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 ${
-          isLoading ? "opacity-50 cursor-not-allowed" : ""
+          loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {isLoading ? "Registering..." : "Register"}
+        {loading ? "Registering..." : "Register"}
       </button>
     </form>
   );

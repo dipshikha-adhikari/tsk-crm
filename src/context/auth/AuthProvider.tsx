@@ -1,11 +1,17 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import { listenToAuthChanges } from "@/store/slices/authSlice";
 
+
+export interface AppUser extends User {
+  role?: string; // optional role property
+}
 interface AuthContextType {
-  user: User | null;
+  user: AppUser | null;
   loading: boolean;
-  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -13,6 +19,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+    const dispatch = useDispatch<AppDispatch>();
+  
+    useEffect(() => {
+      dispatch(listenToAuthChanges());
+    }, [dispatch]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -22,22 +34,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return unsubscribe;
   }, []);
 
-  const logout = async () => {
-    try {
-      setLoading(true);
-      await signOut(auth);
-      // No need to setUser(null) here - onAuthStateChanged will handle it
-    } finally {
-      setLoading(false);
-    }
-  };
-
+ 
   // Memoize context value to prevent unnecessary re-renders
   const contextValue = useMemo(
     () => ({
       user,
       loading,
-      logout,
     }),
     [user, loading]
   ); // Only recompute when user or loading changes
@@ -47,10 +49,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+

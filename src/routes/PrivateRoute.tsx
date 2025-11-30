@@ -1,12 +1,22 @@
+
+import { ReactElement, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import type { JSX } from "react";
-import { useAuth } from "@/context/auth/AuthProvider";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import Navbar from "@/components/shared/header/Navbar";
 
-const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  const { user, loading } = useAuth();
+interface PrivateRouteProps {
+  children: ReactElement; // Must be ReactElement
+}
 
-  if (loading) return <div>Loading...</div>;
-  return user ? children : <Navigate to="/auth" />;
+export const PrivateRoute = ({ children }: PrivateRouteProps): ReactElement => {
+  const { user, isAuthReady } = useSelector((state: RootState) => state.auth);
+
+  if (!isAuthReady) return <div>Loading...</div>;
+
+  return user ? 
+    <>
+      {children}
+    </>
+  : <Navigate to="/auth" replace />;
 };
-
-export default PrivateRoute;

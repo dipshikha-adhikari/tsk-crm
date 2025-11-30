@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 
 type Props = {
   onSubmit: (email: string, password: string) => void;
+  loading:boolean
 };
 
-const LoginForm = ({ onSubmit }: Props) => {
+const LoginForm = ({ onSubmit,loading }: Props) => {
   const {
     register,
     handleSubmit,
@@ -47,7 +48,10 @@ const LoginForm = ({ onSubmit }: Props) => {
 
       <button
         type="submit"
-        className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+        disabled={loading}
+        className={`w-full cursor-pointer bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 $${
+          loading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
         Login
       </button>
